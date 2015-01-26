@@ -1,5 +1,6 @@
-tmp
+tmp/
 .bundle
 *.lock
 .kitchen/
 .kitchen.local.yml
+.librarian/

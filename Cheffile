@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'https://supermarket.getchef.com/api/v1'
+
+cookbook 'rabbitmq_federation', :path => "./"
+
+cookbook 'rabbitmq',
+  :git => 'https://github.com/heavywater/rabbitmq.git',
+  :ref => 'feature/parameter'
