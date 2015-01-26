@@ -1,0 +1,5 @@
+default['rabbitmq_federation']['upstream']['name'] = 'federation-upstream'
+default['rabbitmq_federation']['upstream']['set'] = 'federation-upstreams'
+default['rabbitmq_federation']['upstream']['uri'] = 'amqp://server-name'
+default['rabbitmq_federation']['upstream']['vhost'] = '/'
+default['rabbitmq_federation']['upstream']['expires'] = 'none'
