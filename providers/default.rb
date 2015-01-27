@@ -18,6 +18,34 @@
 #
 
 action :set do
+  options = {'uri' => new_resource.uri}
+  options['expires'] = new_resource.expires if new_resource.expires
+
+  rabbitmq_parameter new_resource.name do
+    component 'federation-upstream'
+    vhost new_resource.vhost
+    params options
+  end
+
+  node.run_state['rabbitmq_federation'] ||= {'sets' => {}}
+
+  set_members = [{'upstream' => new_resource.name}] +
+    (node.run_state['rabbitmq_federation']['sets'][new_resource.set] || [])
+  set_members.uniq!
+
+  node.run_state['rabbitmq_federation']['sets'][new_resource.set] = set_members
+
+  rabbitmq_parameter new_resource.set do
+    component 'federation-upstream-set'
+    params set_members
+  end
+
+  rabbitmq_policy "federate_#{new_resource.name}" do
+    vhost new_resource.vhost
+    pattern new_resource.pattern
+    apply_to new_resource.apply_to
+    params 'federation-upstream-set' => new_resource.set
+  end
 end
 
 action :clear do

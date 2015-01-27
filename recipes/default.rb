@@ -33,10 +33,13 @@ rabbitmq_plugin 'rabbitmq_federation'
 # '[json-object, json-object, ...]'
 #
 upstream = node['rabbitmq_federation']['upstream']
+policy = node['rabbitmq_federation']['policy']
 
 rabbitmq_federation upstream['name'] do
   set upstream['set']
   uri upstream['uri']
   vhost upstream['vhost']
   expires upstream['expires']
+  apply_to policy['apply_to']
+  pattern policy['pattern']
 end

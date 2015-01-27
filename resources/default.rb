@@ -21,7 +21,9 @@ actions :set, :clear
 default_action :set
 
 attribute :name, :kind_of => String, :name_attribute => true
-attribute :set, :kind_of => String
-attribute :uri, :kind_of => [String, Array]
+attribute :set, :kind_of => String, :required => true
+attribute :uri, :kind_of => [String, Array], :required => true
 attribute :vhost, :kind_of => String
-attribute :expires, :kind_of => [String, Integer]
+attribute :expires, :kind_of => Integer
+attribute :apply_to, :kind_of => String, :equal_to => %w(all queues exchanges), :default => 'all'
+attribute :pattern, :kind_of => String, :default => '^amq\.'
