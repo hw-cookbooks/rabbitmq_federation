@@ -13,4 +13,16 @@ suites:
     run_list:
       - recipe[rabbitmq]
       - recipe[rabbitmq_federation]
-    attributes:
+  - name: upstream
+    driver:
+      instance_name: upstream
+    run_list:
+      - recipe[sensu::rabbitmq]
+      - recipe[sensu]
+  - name: sensu
+    driver:
+      links: "upstream:upstream"
+    run_list:
+      - recipe[sensu::rabbitmq]
+      - recipe[sensu]
+      - recipe[rabbitmq_federation::sensu]

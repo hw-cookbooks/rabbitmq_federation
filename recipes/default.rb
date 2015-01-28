@@ -21,17 +21,6 @@
 # this recipe. We're going to enable the Federation plugin and
 # configure federation using the federation LWRP that this cookbook
 # provides, using cookbook attributes for the resource.
-rabbitmq_plugin 'rabbitmq_federation'
-
-# rabbitmqctl set_parameter federation-upstream my-upstream \
-# '{"uri":"amqp://server-name","expires":3600000}'
-#
-#  rabbitmqctl set_policy --apply-to exchanges federate-me "^amq\." \
-# '{"federation-upstream-set":"all"}'
-#
-# rabbitmqctl set_parameter federation-upstream-set name \
-# '[json-object, json-object, ...]'
-#
 upstream = node['rabbitmq_federation']['upstream']
 policy = node['rabbitmq_federation']['policy']
 

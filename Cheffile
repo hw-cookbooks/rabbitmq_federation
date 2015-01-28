@@ -8,3 +8,5 @@ cookbook 'rabbitmq_federation', :path => "./"
 cookbook 'rabbitmq',
   :git => 'https://github.com/heavywater/rabbitmq.git',
   :ref => 'feature/parameter'
+
+cookbook 'sensu'

@@ -18,6 +18,8 @@
 #
 
 action :set do
+  rabbitmq_plugin 'rabbitmq_federation'
+
   options = {'uri' => new_resource.uri}
   options['expires'] = new_resource.expires if new_resource.expires
 
