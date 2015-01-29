@@ -18,11 +18,12 @@ suites:
       instance_name: upstream
     run_list:
       - recipe[sensu::rabbitmq]
+      - recipe[sensu::redis]
       - recipe[sensu]
+      - recipe[sensu::server_service]
   - name: sensu
     driver:
       links: "upstream:upstream"
     run_list:
       - recipe[sensu::rabbitmq]
-      - recipe[sensu]
       - recipe[rabbitmq_federation::sensu]

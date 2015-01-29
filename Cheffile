@@ -3,10 +3,8 @@
 
 site 'https://supermarket.getchef.com/api/v1'
 
-cookbook 'rabbitmq_federation', :path => "./"
+cookbook 'rabbitmq_federation', :path => './'
 
-cookbook 'rabbitmq',
-  :git => 'https://github.com/heavywater/rabbitmq.git',
-  :ref => 'feature/parameter'
+cookbook 'rabbitmq', '>= 3.9.0'
 
 cookbook 'sensu'

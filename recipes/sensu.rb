@@ -30,20 +30,26 @@ upstream_nodes = Discovery.all(node['rabbitmq_federation']['sensu']['search'],
 upstream_nodes.each do |upstream_node|
   sensu_rabbitmq = upstream_node['sensu']['rabbitmq']
 
-  use_ssl = upstream_node['sensu']['use_ssl']
+  use_ssl = false# upstream_node['sensu']['use_ssl']
   rabbitmq_uri = (use_ssl ? 'amqps://' : 'amqp://')
 
   rabbitmq_uri << [sensu_rabbitmq['user'], sensu_rabbitmq['password']].join(':')
   rabbitmq_uri << '@'
 
   address = Discovery.ipaddress(:remote_node => upstream_node, :node => node)
-  port = sensu_rabbitmq['port']
+  port = 5672# sensu_rabbitmq['port']
   rabbitmq_uri << [address, port].join(':')
 
+  if sensu_rabbitmq['vhost']
+    rabbitmq_uri << ('/' + sensu_rabbitmq['vhost'].gsub(/\//, '%2F'))
+  end
+
   if use_ssl
-    certfile = sensu_rabbitmq['ssl']['cert_chain_file'].gsub(/\//, '%2F')
-    keyfile = sensu_rabbitmq['ssl']['private_key_file'].gsub(/\//, '%2F')
-    rabbitmq_uri << "?certfile=#{certfile}&"
+    cafile = upstream_node['rabbitmq']['ssl_cacert'].gsub(/\//, '%2F')
+    certfile = upstream_node['rabbitmq']['ssl_cert'].gsub(/\//, '%2F')
+    keyfile = upstream_node['rabbitmq']['ssl_key'].gsub(/\//, '%2F')
+    rabbitmq_uri << "?cafile=#{cafile}&"
+    rabbitmq_uri << "certfile=#{certfile}&"
     rabbitmq_uri << "keyfile=#{keyfile}"
   end
 

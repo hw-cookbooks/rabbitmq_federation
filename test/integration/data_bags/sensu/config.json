@@ -1,0 +1,12 @@
+{
+    "id": "config",
+    "checks": {
+        "test": {
+            "command": "true",
+            "subscribers": [
+                "test"
+            ],
+            "interval": 10
+        }
+    }
+}

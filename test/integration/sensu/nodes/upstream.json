@@ -9,12 +9,13 @@
                 "port": 5671,
                 "vhost": "/sensu",
                 "user": "sensu",
-                "password": "password",
-                "ssl": {
-                    "cert_chain_file": "/etc/sensu/ssl/cert.pem",
-                    "private_key_file": "/etc/sensu/ssl/key.pem"
-                }
+                "password": "password"
             }
+        },
+        "rabbitmq": {
+            "ssl_cacert": "/etc/rabbitmq/ssl/cacert.pem",
+            "ssl_cert": "/etc/rabbitmq/ssl/cert.pem",
+            "ssl_key": "/etc/rabbitmq/ssl/key.pem"
         }
     },
     "automatic": {
