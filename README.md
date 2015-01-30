@@ -1,24 +1,32 @@
 rabbitmq_federation Cookbook
 ============================
-TODO: Enter the cookbook description here.
+This cookbook provides a Chef LWRP for configuring RabbitMQ
+federation, `rabbitmq_federation`. The LWRP enables the RabbitMQ
+federation plugin, creates RabbitMQ parameters for a federation link
+upstream and its set, and creates a RabbitMQ policy to declare what is
+federated and applies it to the upstream set.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook also provides two recipes to serve as usage examples.
+The `default` recipe will configure RabbitMQ federation using serveral
+cookbook attributes. The `sensu` recipe will configure RabbitMQ
+federation for Sensu's exchanges, intended to connect regional
+RabbitMQ clusters.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+#### cookbooks
 
-e.g.
-#### packages
-- `toaster` - rabbitmq_federation needs toaster to brown your bagel.
+* [RabbitMQ](https://supermarket.chef.io/cookbooks/rabbitmq)
+
+For the `sensu` recipe (suggested):
+
+* [Discovery](https://supermarket.chef.io/cookbooks/discovery)
+* [Sensu](https://supermarket.chef.io/cookbooks/sensu)
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
-#### rabbitmq_federation::default
+#### rabbitmq_federation::sensu
 <table>
   <tr>
     <th>Key</th>
@@ -27,37 +35,30 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['rabbitmq_federation']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['rabbitmq_federation']['sensu']['search']</tt></td>
+    <td>String</td>
+    <td>Chef search term for RabbitMQ upstreams</td>
+    <td><tt>'recipes:sensu\:\:rabbitmq'</tt></td>
   </tr>
 </table>
 
 Usage
 -----
-#### rabbitmq_federation::default
-TODO: Write usage instructions for each cookbook.
+#### rabbitmq_federation::sensu
 
-e.g.
-Just include `rabbitmq_federation` in your node's `run_list`:
+By default, the recipe will discover all RabbitMQ nodes (regardless of
+Chef environment) that were configured by the `sensu::rabbitmq`
+community recipe. The default federation pattern attribute is for
+regional RabbitMQ cluster nodes, those that the Sensu clients connect
+to, as it federates the Sensu client subscription exchanges.
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[rabbitmq_federation]"
-  ]
-}
-```
+Include `rabbitmq_federation::sensu` in your node's expanded run list,
+after installing and configuring RabbitMQ with `sensu::rabbitmq`.
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
+2. Create a named feature branch (like `feature/add_component_x`)
 3. Write your change
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
@@ -65,4 +66,5 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+
+Sean Porter <portertech@gmail.com>

@@ -21,7 +21,7 @@
 # RabbitMQ nodes that are used for Sensu. The RabbitMQ nodes may be
 # RabbitMQ cluster members. This example will only work when using the
 # official Sensu Chef cookbook to configure RabbitMQ, and encrypted
-# data bag items are NOT being used for the RabbitMQ credentials.
+# data bag items can NOT be used for the RabbitMQ credentials.
 upstream_nodes = Discovery.all(node['rabbitmq_federation']['sensu']['search'],
   :node => node,
   :raw_search => true,

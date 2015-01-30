@@ -18,9 +18,9 @@
 #
 
 # Be sure to install, configure, and start RabbitMQ prior to using
-# this recipe. We're going to enable the Federation plugin and
-# configure federation using the federation LWRP that this cookbook
-# provides, using cookbook attributes for the resource.
+# this recipe. We're going to enable the RabbitMQ federation plugin
+# and configure federation using the federation LWRP that this
+# cookbook provides, using cookbook attributes to drive the resource.
 upstream = node['rabbitmq_federation']['upstream']
 policy = node['rabbitmq_federation']['policy']
 
