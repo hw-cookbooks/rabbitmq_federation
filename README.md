@@ -113,10 +113,15 @@ By default, the recipe will discover all RabbitMQ nodes (regardless of
 Chef environment) that were configured by the `sensu::rabbitmq`
 community recipe. The default federation pattern attribute is for
 regional RabbitMQ cluster nodes, those that the Sensu clients connect
-to, as it federates the Sensu client subscription exchanges.
+to, as it federates the Sensu client subscription exchanges. To narrow
+the Chef search scope, override
+`['rabbitmq_federation']['sensu']['search']` appropriately. To
+federate the Sensu client keepalive and check result exchanges,
+override `['rabbitmq_federation']['sensu']['search']` to
+`'^(results|keepalives)$'`.
 
-Include `rabbitmq_federation::sensu` in your node's expanded run list,
-after installing and configuring RabbitMQ with `sensu::rabbitmq`.
+Include `rabbitmq_federation::sensu`, after installing and configuring
+RabbitMQ with `sensu::rabbitmq`.
 
 Contributing
 ------------
@@ -131,3 +136,16 @@ License and Authors
 -------------------
 
 Sean Porter <portertech@gmail.com>
+
+TODO
+----
+
+* Add support for Sensu RabbitMQ credentials in encrypted data bag
+  items.
+
+* Add support for federated exchange max-hops, message-ttl, and ha-policy
+
+* Add support for federation policy priority and ha-mode
+
+* Add support for federated upstream queue naming, currently forced to
+  use the same name as the federated queue.
