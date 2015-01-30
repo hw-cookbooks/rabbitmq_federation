@@ -26,6 +26,6 @@ suites:
       links: "upstream:upstream"
     run_list:
       - recipe[sensu::rabbitmq]
-      - recipe[rabbitmq_federation::sensu]
       - recipe[sensu]
+      - recipe[rabbitmq_federation::sensu]
       - recipe[sensu::client_service]

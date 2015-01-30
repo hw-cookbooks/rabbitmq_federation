@@ -46,12 +46,8 @@ upstream_nodes.each do |upstream_node|
   end
 
   if use_ssl
-    cafile = upstream_node['rabbitmq']['ssl_cacert'].gsub(/\//, '%2F')
-    certfile = upstream_node['rabbitmq']['ssl_cert'].gsub(/\//, '%2F')
-    keyfile = upstream_node['rabbitmq']['ssl_key'].gsub(/\//, '%2F')
-    rabbitmq_uri << "?cafile=#{cafile}&"
-    rabbitmq_uri << "certfile=#{certfile}&"
-    rabbitmq_uri << "keyfile=#{keyfile}"
+    rabbitmq_uri << '?certfile=/etc/rabbitmq/ssl/client/cert.pem&'
+    rabbitmq_uri << 'keyfile=/etc/rabbitmq/ssl/client/key.pem'
   end
 
   rabbitmq_federation "sensu-upstream-#{upstream_node.name}" do

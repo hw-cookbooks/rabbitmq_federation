@@ -11,11 +11,6 @@
                 "user": "sensu",
                 "password": "password"
             }
-        },
-        "rabbitmq": {
-            "ssl_cacert": "/etc/rabbitmq/ssl/cacert.pem",
-            "ssl_cert": "/etc/rabbitmq/ssl/cert.pem",
-            "ssl_key": "/etc/rabbitmq/ssl/key.pem"
         }
     },
     "automatic": {

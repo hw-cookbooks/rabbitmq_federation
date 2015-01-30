@@ -52,4 +52,15 @@ action :set do
 end
 
 action :clear do
+  rabbitmq_parameter new_resource.name do
+    action :clear
+  end
+
+  rabbitmq_parameter new_resource.set do
+    action :clear
+  end
+
+  rabbitmq_policy "federate_#{new_resource.name}" do
+    action :clear
+  end
 end
