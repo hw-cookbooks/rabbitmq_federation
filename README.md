@@ -7,14 +7,14 @@ upstream and its set, and creates a RabbitMQ policy to declare what is
 federated and applies it to the upstream set.
 
 This cookbook also provides two recipes to serve as usage examples.
-The `default` recipe will configure RabbitMQ federation using serveral
+The `default` recipe will configure RabbitMQ federation using several
 cookbook attributes. The `sensu` recipe will configure RabbitMQ
 federation for Sensu's exchanges, intended to connect regional
 RabbitMQ clusters.
 
 Requirements
 ------------
-#### cookbooks
+#### Cookbooks
 
 * [RabbitMQ](https://supermarket.chef.io/cookbooks/rabbitmq)
 
@@ -39,6 +39,18 @@ Attributes
     <td>String</td>
     <td>Chef search term for RabbitMQ upstreams</td>
     <td><tt>'recipes:sensu\:\:rabbitmq'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['sensu']['environment_aware']</tt></td>
+    <td>Boolean</td>
+    <td>Scope Chef search to the Chef environment</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['sensu']['pattern']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation policy exchange pattern</td>
+    <td><tt>'^(?!amq\.|results$|keepalives$)'</tt></td>
   </tr>
 </table>
 
