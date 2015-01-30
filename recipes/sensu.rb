@@ -24,20 +24,21 @@
 # data bag items are NOT being used for the RabbitMQ credentials.
 upstream_nodes = Discovery.all(node['rabbitmq_federation']['sensu']['search'],
   :node => node,
-  :environment_aware => node['rabbitmq_federation']['sensu']['environment_aware'],
-  :raw_search => true)
+  :raw_search => true,
+  :minimum_response_time_sec => false,
+  :environment_aware => node['rabbitmq_federation']['sensu']['environment_aware'])
 
 upstream_nodes.each do |upstream_node|
   sensu_rabbitmq = upstream_node['sensu']['rabbitmq']
 
-  use_ssl = false# upstream_node['sensu']['use_ssl']
+  use_ssl = upstream_node['sensu']['use_ssl']
   rabbitmq_uri = (use_ssl ? 'amqps://' : 'amqp://')
 
   rabbitmq_uri << [sensu_rabbitmq['user'], sensu_rabbitmq['password']].join(':')
   rabbitmq_uri << '@'
 
   address = Discovery.ipaddress(:remote_node => upstream_node, :node => node)
-  port = 5672# sensu_rabbitmq['port']
+  port = sensu_rabbitmq['port']
   rabbitmq_uri << [address, port].join(':')
 
   if sensu_rabbitmq['vhost']
@@ -53,8 +54,8 @@ upstream_nodes.each do |upstream_node|
     rabbitmq_uri << "keyfile=#{keyfile}"
   end
 
-  rabbitmq_federation "federation-upstream-sensu-#{upstream_node.name}" do
-    set 'federation-upstreams-sensu'
+  rabbitmq_federation "sensu-upstream-#{upstream_node.name}" do
+    set 'sensu-upstreams'
     uri rabbitmq_uri
     vhost sensu_rabbitmq['vhost']
     apply_to 'exchanges'

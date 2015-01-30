@@ -39,6 +39,7 @@ action :set do
 
   rabbitmq_parameter new_resource.set do
     component 'federation-upstream-set'
+    vhost new_resource.vhost
     params set_members
   end
 

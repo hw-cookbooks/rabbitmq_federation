@@ -8,5 +8,12 @@
             ],
             "interval": 10
         }
+    },
+    "client": {
+        "name": "test",
+        "address": "localhost",
+        "subscriptions": [
+            "test"
+        ]
     }
 }

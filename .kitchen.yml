@@ -27,3 +27,5 @@ suites:
     run_list:
       - recipe[sensu::rabbitmq]
       - recipe[rabbitmq_federation::sensu]
+      - recipe[sensu]
+      - recipe[sensu::client_service]
