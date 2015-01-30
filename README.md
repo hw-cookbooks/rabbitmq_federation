@@ -25,6 +25,57 @@ For the `sensu` recipe (suggested):
 
 Attributes
 ----------
+#### rabbitmq_federation::default
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['upstream']['name']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation upstream name</td>
+    <td><tt>'upstream-name'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['upstream']['set']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation upstream set name</td>
+    <td><tt>'upstream-set-name'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['upstream']['uri']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation upstream URI</td>
+    <td><tt>'amqp://server-name'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['upstream']['vhost']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation upstream vhost</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['upstream']['expire']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation queue expiry time (ms)</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['policy']['pattern']</tt></td>
+    <td>String</td>
+    <td>RabbitMQ federation policy pattern</td>
+    <td><tt>'^amq\.'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['rabbitmq_federation']['policy']['apply_to']</tt></td>
+    <td>String</td>
+    <td>What to apply the RabbitMQ federation policy to</td>
+    <td><tt>'exchanges'</tt></td>
+  </tr>
+</table>
 
 #### rabbitmq_federation::sensu
 <table>
