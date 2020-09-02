@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rabbitmq_federation
+# Cookbook:: rabbitmq_federation
 # Recipe:: default
 #
-# Copyright 2015, Heavy Water Operations, LLC.
+# Copyright:: 2015, Heavy Water Operations, LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

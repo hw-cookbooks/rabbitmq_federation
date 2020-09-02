@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rabbitmq_federation
+# Cookbook:: rabbitmq_federation
 # Provider:: default (rabbitmq_federation)
 #
-# Copyright 2015, Heavy Water Operations, LLC.
+# Copyright:: 2015, Heavy Water Operations, LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 action :set do
   rabbitmq_plugin 'rabbitmq_federation'
 
-  options = {'uri' => new_resource.uri}
+  options = { 'uri' => new_resource.uri }
   options['expires'] = new_resource.expires if new_resource.expires
 
   rabbitmq_parameter new_resource.name do
@@ -29,10 +29,10 @@ action :set do
     params options
   end
 
-  node.run_state['rabbitmq_federation'] ||= {'sets' => {}}
+  node.run_state['rabbitmq_federation'] ||= { 'sets' => {} }
 
-  set_members = [{'upstream' => new_resource.name}] +
-    (node.run_state['rabbitmq_federation']['sets'][new_resource.set] || [])
+  set_members = [{ 'upstream' => new_resource.name}] +
+                (node.run_state['rabbitmq_federation']['sets'][new_resource.set] || [])
   set_members.uniq!
 
   node.run_state['rabbitmq_federation']['sets'][new_resource.set] = set_members

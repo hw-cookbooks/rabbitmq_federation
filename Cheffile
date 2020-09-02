@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
-#^syntax detection
+# ^syntax detection
 
 site 'https://supermarket.getchef.com/api/v1'
 
-cookbook 'rabbitmq_federation', :path => './'
+cookbook 'rabbitmq_federation', path: './'
 
 cookbook 'rabbitmq', '>= 3.9.0'
 
