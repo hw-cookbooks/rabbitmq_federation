@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rabbitmq_federation
+# Cookbook:: rabbitmq_federation
 # Resource:: default (rabbitmq_federation)
 #
-# Copyright 2015, Heavy Water Operations, LLC.
+# Copyright:: 2015, Heavy Water Operations, LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,9 @@
 actions :set, :clear
 default_action :set
 
-attribute :name, :kind_of => String, :name_attribute => true
-attribute :set, :kind_of => String, :required => true
-attribute :uri, :kind_of => [String, Array], :required => true
-attribute :vhost, :kind_of => String
-attribute :expires, :kind_of => Integer
-attribute :apply_to, :kind_of => String, :equal_to => %w(all queues exchanges), :default => 'all'
-attribute :pattern, :kind_of => String, :default => '^amq\.'
+attribute :set, kind_of: String, required: true
+attribute :uri, kind_of: [String, Array], required: true
+attribute :vhost, kind_of: String
+attribute :expires, kind_of: Integer
+attribute :apply_to, kind_of: String, equal_to: %w(all queues exchanges), default: 'all'
+attribute :pattern, kind_of: String, default: '^amq\.'

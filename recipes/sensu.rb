@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rabbitmq_federation
+# Cookbook:: rabbitmq_federation
 # Recipe:: sensu
 #
-# Copyright 2015, Heavy Water Operations, LLC.
+# Copyright:: 2015, Heavy Water Operations, LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,10 +23,10 @@
 # official Sensu Chef cookbook to configure RabbitMQ, and encrypted
 # data bag items can NOT be used for the RabbitMQ credentials.
 upstream_nodes = Discovery.all(node['rabbitmq_federation']['sensu']['search'],
-  :node => node,
-  :raw_search => true,
-  :minimum_response_time_sec => false,
-  :environment_aware => node['rabbitmq_federation']['sensu']['environment_aware'])
+  node: node,
+  raw_search: true,
+  minimum_response_time_sec: false,
+  environment_aware: node['rabbitmq_federation']['sensu']['environment_aware'])
 
 upstream_nodes.each do |upstream_node|
   sensu_rabbitmq = upstream_node['sensu']['rabbitmq']
@@ -37,12 +37,12 @@ upstream_nodes.each do |upstream_node|
   rabbitmq_uri << [sensu_rabbitmq['user'], sensu_rabbitmq['password']].join(':')
   rabbitmq_uri << '@'
 
-  address = Discovery.ipaddress(:remote_node => upstream_node, :node => node)
+  address = Discovery.ipaddress(remote_node: upstream_node, node: node)
   port = sensu_rabbitmq['port']
   rabbitmq_uri << [address, port].join(':')
 
   if sensu_rabbitmq['vhost']
-    rabbitmq_uri << ('/' + sensu_rabbitmq['vhost'].gsub(/\//, '%2F'))
+    rabbitmq_uri << ('/' + sensu_rabbitmq['vhost'].gsub(%r{/}, '%2F'))
   end
 
   if use_ssl
