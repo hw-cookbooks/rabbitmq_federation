@@ -31,7 +31,7 @@ action :set do
 
   node.run_state['rabbitmq_federation'] ||= { 'sets' => {} }
 
-  set_members = [{ 'upstream' => new_resource.name}] +
+  set_members = [{ 'upstream' => new_resource.name }] +
                 (node.run_state['rabbitmq_federation']['sets'][new_resource.set] || [])
   set_members.uniq!
 
